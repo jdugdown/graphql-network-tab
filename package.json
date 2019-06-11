@@ -1,0 +1,59 @@
+{
+  "name": "graphql-network-tab",
+  "version": "1.0.0",
+  "description": "A Chrome extension that adds a more useful network tab for GraphQL operations.",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "eslint": "eslint \"./**/*.{js,jsx}\"",
+    "prettier": "prettier --write \"./**/*\"",
+    "start": "webpack-dev-server --open --mode development --port 3111",
+    "stylelint": "stylelint \"./**/*.{css,scss}\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jdugdown/graphql-network-tab.git"
+  },
+  "keywords": [
+    "GraphQL",
+    "Chrome",
+    "DevTools",
+    "React"
+  ],
+  "author": "Josh <josh@joshuad.me>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jdugdown/graphql-network-tab/issues"
+  },
+  "homepage": "https://github.com/jdugdown/graphql-network-tab#readme",
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^2.1.1",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-config-react": "^1.1.7",
+    "eslint-plugin-import": "^2.17.3",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.13.0",
+    "html-webpack-plugin": "^3.2.0",
+    "prettier": "^1.17.1",
+    "style-loader": "^0.23.1",
+    "stylelint": "^10.0.1",
+    "webpack": "^4.32.2",
+    "webpack-cli": "^3.3.2",
+    "webpack-dev-server": "^3.5.1"
+  },
+  "dependencies": {
+    "clsx": "^1.0.4",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  }
+}

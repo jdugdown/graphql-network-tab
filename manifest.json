@@ -1,0 +1,10 @@
+{
+  "name": "GraphQL Network",
+  "description": "A Chrome extension that adds a more useful network tab for GraphQL operations.",
+  "author": "Josh <josh@joshuad.me>",
+  "version": "0.1",
+  "manifest_version": 2,
+  "minimum_chrome_version": "75",
+  "devtools_page": "./panel.html",
+  "permissions": ["tabs", "http://*/*", "https://*/*"]
+}

@@ -1,0 +1,7 @@
+.dark {
+  color: var(--light);
+}
+
+.greets {
+  margin: 1rem 0 2rem;
+}

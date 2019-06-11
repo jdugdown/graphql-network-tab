@@ -1,0 +1,13 @@
+{
+    "parserOptions": {
+        "ecmaVersion": 9
+    },
+    "extends": [
+        "airbnb",
+        "prettier",
+        "react"
+    ],
+    "rules": {
+        "indent": ["error", 2]
+    }
+}

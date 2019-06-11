@@ -1,0 +1,8 @@
+node_modules
+build
+.eslintignore
+.eslintrc
+.prettierignore
+.prettierrc
+.gitignore
+LICENSE
