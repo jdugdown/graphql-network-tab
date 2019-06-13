@@ -67,7 +67,6 @@ export default class GraphQLTab extends React.Component {
                     Object.keys(content.data).map(operation => (
                       <div key={`${startedDateTime}.${operation}`}>{operation}</div>
                     ))}
-                  <div>{id}</div>
                 </td>
                 <td>{getOrDefault(content, "warnings", []).length}</td>
                 <td>{getOrDefault(content, "errors", []).length}</td>
