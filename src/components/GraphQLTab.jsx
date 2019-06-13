@@ -1,6 +1,7 @@
 import React from "react";
 import clsx from "clsx";
 import PropTypes from "prop-types";
+import { formatRequestObject, getOrDefault } from "../utils";
 import styles from "./GraphQLTab.css";
 
 export default class GraphQLTab extends React.Component {
@@ -13,23 +14,23 @@ export default class GraphQLTab extends React.Component {
     onRequestFinished.addListener(request => this.handleRequest(request));
   }
 
+  clearRequests = () => this.setState({ requests: [] });
+
   handleRequest(request) {
-    console.log(request);
-    request.getContent(content => {
-      this.setState(prev => {
-        const prevRequests = prev.requests;
-        const nextRequest = {
-          request: request.request,
-          response: request.response,
-          time: Math.round(request.time),
-          startedDateTime: request.startedDateTime,
-          content: JSON.parse(content)
-        };
-        return {
-          ...prev,
-          requests: [...prevRequests, nextRequest]
-        };
-      });
+    console.log("Handling request: ", request);
+    request.getContent(content => this.setRequestInState(request, content));
+  }
+
+  setRequestInState(request, content) {
+    this.setState(prev => {
+      const prevRequests = prev.requests;
+      console.log("Attempting to format request with content: ", content);
+      const nextRequest = formatRequestObject(request, content);
+      console.log("Setting request in state: ", nextRequest);
+      return {
+        ...prev,
+        requests: [...prevRequests, nextRequest]
+      };
     });
   }
 
@@ -43,27 +44,45 @@ export default class GraphQLTab extends React.Component {
 
     return (
       <div className={themeClass}>
+        <button type="button" onClick={this.clearRequests}>
+          Clear
+        </button>
         <table>
           <thead>
-            <th>Operation</th>
-            <th>Warnings</th>
-            <th>Errors</th>
-            <th>Status</th>
-            <th>Time</th>
-            <th>Method</th>
-            <th>Type</th>
+            <tr>
+              <th>Operation(s)</th>
+              <th>Warnings</th>
+              <th>Errors</th>
+              <th>Status</th>
+              <th>Time</th>
+              <th>Method</th>
+              <th>Content-Type</th>
+            </tr>
           </thead>
           <tbody>
-            {requests.map(({ request, response, time }) => (
-              <tr>
-                <td>Operation name goes here</td>
-                <td>0</td>
-                <td>0</td>
-                <td>{response.status}</td>
+            {requests.map(({ content, id, response, request, startedDateTime, time }) => (
+              <tr key={id}>
+                <td>
+                  {content.data &&
+                    Object.keys(content.data).map(operation => (
+                      <div key={`${startedDateTime}.${operation}`}>{operation}</div>
+                    ))}
+                  <div>{id}</div>
+                </td>
+                <td>{getOrDefault(content, "warnings", []).length}</td>
+                <td>{getOrDefault(content, "errors", []).length}</td>
+                <td>{getOrDefault(response, "status")}</td>
                 <td>{`${time} ms`}</td>
-                <td>{request.method}</td>
-                <td>{response.content.mimeType}</td>
+                <td>{getOrDefault(request, "method")}</td>
+                <td>{getOrDefault(response, ["content", "mimeType"])}</td>
               </tr>
+              // <tr>
+              //   <td colSpan="7">
+              //     <pre>
+              //       <code>{JSON.stringify(content, null, 2)}</code>
+              //     </pre>
+              //   </td>
+              // </tr>
             ))}
           </tbody>
         </table>
@@ -73,6 +92,8 @@ export default class GraphQLTab extends React.Component {
 }
 
 GraphQLTab.propTypes = {
-  onRequestFinished: PropTypes.func.isRequired,
+  onRequestFinished: PropTypes.shape({
+    addListener: PropTypes.func.isRequired
+  }).isRequired,
   theme: PropTypes.string.isRequired
 };
