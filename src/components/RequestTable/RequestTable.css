@@ -1,0 +1,12 @@
+.requestTable tbody tr {
+  cursor: pointer;
+}
+
+.requestTable .selectedRow td,
+.requestTable .selectedRow:hover td {
+  background-color: var(--primary);
+}
+
+.selection {
+  padding-left: 0.5rem;
+}

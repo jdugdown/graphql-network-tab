@@ -1,10 +1,14 @@
 :root {
+  font-size: 16px;
   --primary: #3498db;
   --success: #2ecc71;
+  --warning: #f39c12;
   --error: #e74c3c;
   --dark: #2c3e50;
   --light: #ecf0f1;
+  --transparent-grey-light: rgba(0, 0, 0, 0.1);
   --transparent-grey: rgba(0, 0, 0, 0.15);
+  --transparent-grey-dark: rgba(0, 0, 0, 0.45);
 }
 
 *,
@@ -16,24 +20,51 @@
   line-height: 1.25;
 }
 
-body {
+/* body {
   font-family: sans-serif;
+} */
+
+button {
+  background: var(--primary);
+  color: var(--light);
+  border: 0;
+  margin: 0;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+}
+
+:global(.dark) {
+  color: var(--light);
 }
 
 table {
   width: 100%;
+  border-collapse: collapse;
+}
+
+thead tr {
+  background-color: var(--transparent-grey-dark);
 }
 
 th {
   text-align: left;
-  background-color: var(--transparent-grey);
-}
-
-th,
-td {
-  padding: 0.5rem;
 }
 
 tr:nth-of-type(2n) td {
   background-color: var(--transparent-grey);
+}
+
+tr:hover td {
+  background: var(--transparent-grey-dark);
+  color: var(--light);
+}
+
+th,
+td {
+  padding: 0.25rem 0.375rem;
+}
+
+:global(.narrowCell) {
+  min-width: 75px;
+  width: 12%;
 }

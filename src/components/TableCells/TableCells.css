@@ -1,0 +1,9 @@
+.warning {
+  color: var(--warning);
+  font-weight: 700;
+}
+
+.error {
+  color: var(--error);
+  font-weight: 700;
+}
