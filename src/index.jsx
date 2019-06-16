@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import GraphQLTab from "./components/GraphQLTab";
+import GraphQLTab from "./components/GraphQLTab/GraphQLTab";
 import "./assets/css/main.css";
 
 function initializePanel() {
