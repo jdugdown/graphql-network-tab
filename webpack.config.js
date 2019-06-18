@@ -1,18 +1,26 @@
 var path = require("path");
 
-const HtmlWebPackPlugin = require("html-webpack-plugin");
+const HtmlPlugin = require("html-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
-const htmlWebpackPlugin = new HtmlWebPackPlugin({
+const htmlPlugin = new HtmlPlugin({
   template: "./index.html",
   filename: "./index.html"
 });
+
+const copyPlugin = new CopyPlugin([
+  {
+    from: "./manifest.json",
+    to: "manifest.json"
+  }
+]);
 
 module.exports = {
   mode: "development",
   devtool: "inline-source-map",
   entry: "./src/index.jsx",
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "build"),
     filename: "[name].js"
   },
   resolve: {
@@ -47,5 +55,5 @@ module.exports = {
       }
     ]
   },
-  plugins: [htmlWebpackPlugin]
+  plugins: [htmlPlugin, copyPlugin]
 };

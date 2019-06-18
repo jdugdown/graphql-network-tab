@@ -8,7 +8,7 @@ function initializePanel() {
   const { create, themeName } = chrome.devtools.panels;
   const { onRequestFinished } = chrome.devtools.network;
 
-  create("GraphQL", null, "./dist/index.html", ({ onShown }) => {
+  create("GraphQL", null, "index.html", ({ onShown }) => {
     onShown.addListener(({ document }) => {
       ReactDOM.render(
         <GraphQLTab theme={themeName} onRequestFinished={onRequestFinished} />,

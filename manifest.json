@@ -5,6 +5,5 @@
   "version": "0.1",
   "manifest_version": 2,
   "minimum_chrome_version": "75",
-  "devtools_page": "./panel.html",
   "permissions": ["tabs", "http://*/*", "https://*/*"]
 }
