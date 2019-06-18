@@ -1,0 +1,11 @@
+.headersTable {
+  margin: 0 0 1rem -0.375rem;
+}
+
+.headersTable td {
+  white-space: nowrap;
+}
+
+.headerName {
+  min-width: 180px;
+}

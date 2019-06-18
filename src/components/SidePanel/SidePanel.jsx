@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import sortBy from "lodash/sortBy";
 import { print } from "graphql/language/printer";
 import gql from "graphql-tag";
+import HeadersTable from "../HeadersTable/HeadersTable";
 import styles from "./SidePanel.css";
 
 export default function SidePanel({ request }) {
@@ -19,17 +19,7 @@ export default function SidePanel({ request }) {
       <div className={styles.tabContent}>
         <h2>Request</h2>
         <h3>Headers</h3>
-        {/* TODO: abstract to <HeadersTable /> component */}
-        <table className={styles.headersTable}>
-          <tbody>
-            {sortBy(requestObj.headers, "name").map(({ name, value }) => (
-              <tr key={name}>
-                <td className={styles.headerName}>{name}</td>
-                <td>{value}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <HeadersTable headers={requestObj.headers} />
 
         <h3>Query</h3>
         <pre>
@@ -44,17 +34,7 @@ export default function SidePanel({ request }) {
 
         <h2>Response</h2>
         <h3>Headers</h3>
-        {/* TODO: abstract to <HeadersTable /> component */}
-        <table className={styles.headersTable}>
-          <tbody>
-            {sortBy(responseObj.headers, "name").map(({ name, value }) => (
-              <tr key={name}>
-                <td className={styles.headerName}>{name}</td>
-                <td>{value}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <HeadersTable headers={responseObj.headers} />
 
         <h3>Response Data</h3>
         <pre>
