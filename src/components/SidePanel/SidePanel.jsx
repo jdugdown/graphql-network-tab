@@ -56,6 +56,17 @@ SidePanel.propTypes = {
           value: PropTypes.string.isRequired
         })
       ).isRequired
+    }).isRequired,
+    response: PropTypes.shape({
+      headers: PropTypes.arrayOf(
+        PropTypes.shape({
+          name: PropTypes.string.isRequired,
+          value: PropTypes.string.isRequired
+        })
+      ).isRequired
+    }).isRequired,
+    query: PropTypes.shape({
+      query: PropTypes.string.isRequired
     }).isRequired
   }).isRequired
 };
