@@ -8,7 +8,9 @@ import styles from "./SidePanel.css";
 export default function SidePanel({ request }) {
   const { request: requestObj, response: responseObj } = request;
   const formattedQuery = print(
-    gql`${request.query.query}`
+    gql`
+      ${request.query.query}
+    `
   );
 
   return (
