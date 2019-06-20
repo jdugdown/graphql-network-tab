@@ -1,45 +1,71 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
+import clsx from "clsx";
 import { print } from "graphql/language/printer";
 import gql from "graphql-tag";
 import HeadersTable from "../HeadersTable/HeadersTable";
 import styles from "./SidePanel.css";
 
+const REQUEST = "Request";
+const RESPONSE = "Response";
+const TABS = [REQUEST, RESPONSE];
+
 export default function SidePanel({ request }) {
+  const [activeTab, setActiveTab] = useState(REQUEST);
   const { request: requestObj, response: responseObj } = request;
   const formattedQuery = print(
     gql`
       ${request.query.query}
     `
   );
+  const closeClasses = clsx(styles.tabButton, styles.close);
 
   return (
     <div className={styles.sidePanel}>
-      {/* TODO: tabbed navigation between request and response */}
+      <div className={styles.tabNav}>
+        {/* TODO: close side panel on click */}
+        <button type="button" className={closeClasses}>
+          &times;
+        </button>
+        {TABS.map(tab => {
+          const tabClasses = clsx(styles.tabButton, {
+            [styles.activeTabButton]: tab === activeTab
+          });
+          return (
+            <button
+              key={tab}
+              type="button"
+              className={tabClasses}
+              onClick={() => setActiveTab(tab)}
+            >
+              {tab}
+            </button>
+          );
+        })}
+      </div>
+
       <div className={styles.tabContent}>
-        <h2>Request</h2>
-        <h3>Headers</h3>
-        <HeadersTable headers={requestObj.headers} />
+        {activeTab === REQUEST ? (
+          <>
+            <h3>Headers</h3>
+            <HeadersTable headers={requestObj.headers} />
 
-        <h3>Query</h3>
-        <pre>
-          <code>{formattedQuery}</code>
-        </pre>
+            <h3>Query</h3>
+            <pre>
+              <code>{formattedQuery}</code>
+            </pre>
+          </>
+        ) : (
+          <>
+            <h3>Headers</h3>
+            <HeadersTable headers={responseObj.headers} />
 
-        <br />
-        <br />
-        <hr />
-        <br />
-        <br />
-
-        <h2>Response</h2>
-        <h3>Headers</h3>
-        <HeadersTable headers={responseObj.headers} />
-
-        <h3>Response Data</h3>
-        <pre>
-          <code>{JSON.stringify(request.content, null, 2)}</code>
-        </pre>
+            <h3>Response Data</h3>
+            <pre>
+              <code>{JSON.stringify(request.content, null, 2)}</code>
+            </pre>
+          </>
+        )}
       </div>
     </div>
   );
