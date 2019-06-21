@@ -12,13 +12,12 @@
 
 .tabNav {
   display: flex;
-  border-bottom: 1px solid var(--transparent-grey-dark);
 }
 
 .tabButton {
   flex: 1 1 auto;
   padding: 0.5rem;
-  background-color: var(--transparent-grey);
+  background-color: var(--transparent-grey-dark);
 }
 
 .activeTabButton {
