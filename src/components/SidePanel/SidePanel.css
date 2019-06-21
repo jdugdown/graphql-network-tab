@@ -7,6 +7,7 @@
   bottom: 0;
   width: 75vw;
   z-index: 2;
+  border-left: 1px solid var(--transparent-grey-dark);
 }
 
 .tabNav {
@@ -17,11 +18,11 @@
 .tabButton {
   flex: 1 1 auto;
   padding: 0.5rem;
-  background-color: var(--dark);
+  background-color: var(--transparent-grey);
 }
 
 .activeTabButton {
-  background-color: var(--primary);
+  background-color: var(--dark);
 }
 
 .tabContent {
@@ -37,4 +38,10 @@
   line-height: 1;
   padding: 0;
   width: 30px;
+}
+
+.codeBlock {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--transparent-grey);
 }

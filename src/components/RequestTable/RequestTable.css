@@ -4,7 +4,8 @@
 
 .requestTable .selectedRow td,
 .requestTable .selectedRow:hover td {
-  background-color: var(--primary);
+  background-color: var(--dark);
+  color: var(--light);
 }
 
 .selection {

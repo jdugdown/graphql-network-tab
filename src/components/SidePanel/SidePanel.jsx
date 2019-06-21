@@ -47,23 +47,23 @@ export default function SidePanel({ request, clearSelectedRequest }) {
       <div className={styles.tabContent}>
         {activeTab === REQUEST ? (
           <>
-            <h3>Headers</h3>
-            <HeadersTable headers={requestObj.headers} />
-
             <h3>Query</h3>
-            <pre>
+            <pre className={styles.codeBlock}>
               <code>{formattedQuery}</code>
             </pre>
+
+            <h3>Headers</h3>
+            <HeadersTable headers={requestObj.headers} />
           </>
         ) : (
           <>
-            <h3>Headers</h3>
-            <HeadersTable headers={responseObj.headers} />
-
             <h3>Response Data</h3>
-            <pre>
+            <pre className={styles.codeBlock}>
               <code>{JSON.stringify(request.content, null, 2)}</code>
             </pre>
+
+            <h3>Headers</h3>
+            <HeadersTable headers={responseObj.headers} />
           </>
         )}
       </div>

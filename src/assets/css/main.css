@@ -7,7 +7,7 @@
   --dark: #2c3e50;
   --light: #ecf0f1;
   --transparent-grey-light: rgba(0, 0, 0, 0.1);
-  --transparent-grey: rgba(0, 0, 0, 0.15);
+  --transparent-grey: rgba(0, 0, 0, 0.2);
   --transparent-grey-dark: rgba(0, 0, 0, 0.45);
 }
 
@@ -20,9 +20,9 @@
   line-height: 1.25;
 }
 
-/* body {
-  font-family: sans-serif;
-} */
+h3 {
+  margin-bottom: 0.25rem;
+}
 
 button {
   background: var(--primary);
@@ -48,6 +48,8 @@ thead tr {
 
 th {
   text-align: left;
+  height: 30px;
+  color: var(--light);
 }
 
 tr:nth-of-type(2n) td {
