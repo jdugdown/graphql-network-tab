@@ -75,7 +75,9 @@ export default class GraphQLTab extends React.Component {
           selectedRequestId={selectedRequestId}
           setSelectedRequest={this.setSelectedRequest}
         />
-        {!isEmpty(selectedRequestId) && <SidePanel request={selectedRequest} clearSelectedRequest={this.clearSelectedRequest} />}
+        {!isEmpty(selectedRequestId) && (
+          <SidePanel request={selectedRequest} clearSelectedRequest={this.clearSelectedRequest} />
+        )}
       </div>
     );
   }
