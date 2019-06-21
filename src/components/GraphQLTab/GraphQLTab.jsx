@@ -20,14 +20,6 @@ export default class GraphQLTab extends React.Component {
     onRequestFinished.addListener(request => this.handleRequest(request));
   }
 
-  clearRequests = () => {
-    this.setState({
-      selectedRequest: {},
-      selectedRequestId: "",
-      requests: []
-    });
-  };
-
   handleRequest(request) {
     // TODO: improve checking if this request was a graphql operation
     if (!isNil(get(request, ["request", "postData", "text"]))) {
@@ -61,6 +53,13 @@ export default class GraphQLTab extends React.Component {
     }));
   };
 
+  clearSelectedRequest = () => {
+    this.setState({
+      selectedRequestId: "",
+      selectedRequest: {}
+    });
+  };
+
   render() {
     const { theme } = this.props;
     const { requests, selectedRequest, selectedRequestId } = this.state;
@@ -71,15 +70,12 @@ export default class GraphQLTab extends React.Component {
 
     return (
       <div className={themeClass}>
-        {/* <button type="button" onClick={this.clearRequests} className={styles.clearButton}>
-          Clear
-        </button> */}
         <RequestTable
           data={requests}
           selectedRequestId={selectedRequestId}
           setSelectedRequest={this.setSelectedRequest}
         />
-        {!isEmpty(selectedRequestId) && <SidePanel request={selectedRequest} />}
+        {!isEmpty(selectedRequestId) && <SidePanel request={selectedRequest} clearSelectedRequest={this.clearSelectedRequest} />}
       </div>
     );
   }

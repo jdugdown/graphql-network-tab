@@ -10,7 +10,7 @@ const REQUEST = "Request";
 const RESPONSE = "Response";
 const TABS = [REQUEST, RESPONSE];
 
-export default function SidePanel({ request }) {
+export default function SidePanel({ request, clearSelectedRequest }) {
   const [activeTab, setActiveTab] = useState(REQUEST);
   const { request: requestObj, response: responseObj } = request;
   const formattedQuery = print(
@@ -24,7 +24,7 @@ export default function SidePanel({ request }) {
     <div className={styles.sidePanel}>
       <div className={styles.tabNav}>
         {/* TODO: close side panel on click */}
-        <button type="button" className={closeClasses}>
+        <button type="button" className={closeClasses} onClick={clearSelectedRequest}>
           &times;
         </button>
         {TABS.map(tab => {
@@ -94,5 +94,6 @@ SidePanel.propTypes = {
     query: PropTypes.shape({
       query: PropTypes.string.isRequired
     }).isRequired
-  }).isRequired
+  }).isRequired,
+  clearSelectedRequest: PropTypes.func.isRequired
 };
