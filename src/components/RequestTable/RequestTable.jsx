@@ -70,7 +70,34 @@ export default function RequestTable({ data, selectedRequestId, setSelectedReque
 }
 
 RequestTable.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      request: PropTypes.shape({
+        headers: PropTypes.arrayOf(
+          PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            value: PropTypes.string.isRequired
+          })
+        ).isRequired
+      }).isRequired,
+      response: PropTypes.shape({
+        headers: PropTypes.arrayOf(
+          PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            value: PropTypes.string.isRequired
+          })
+        ).isRequired
+      }).isRequired,
+      time: PropTypes.number.isRequired,
+      query: PropTypes.shape({
+        query: PropTypes.string.isRequired
+      }).isRequired,
+      content: PropTypes.shape({
+        data: PropTypes.shape({}).isRequired
+      }).isRequired
+    })
+  ).isRequired,
   selectedRequestId: PropTypes.string.isRequired,
   setSelectedRequest: PropTypes.func.isRequired
 };

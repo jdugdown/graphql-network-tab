@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import get from "lodash/get";
 import isEmpty from "lodash/isEmpty";
 import isNil from "lodash/isNil";
-import { formatRequestObject, findById } from "../../utils";
+import { formatRequestObject, findById, getOrDefault } from "../../utils";
 import RequestTable from "../RequestTable/RequestTable";
 import SidePanel from "../SidePanel/SidePanel";
 import styles from "./GraphQLTab.css";
@@ -77,7 +77,13 @@ export default class GraphQLTab extends React.Component {
           setSelectedRequest={this.setSelectedRequest}
         />
         {!isEmpty(selectedRequestId) && (
-          <SidePanel request={selectedRequest} clearSelectedRequest={this.clearSelectedRequest} />
+          <SidePanel
+            request={getOrDefault(selectedRequest, "request", {})}
+            response={getOrDefault(selectedRequest, "response", {})}
+            content={getOrDefault(selectedRequest, "content", {})}
+            query={getOrDefault(selectedRequest, "query", {})}
+            clearSelectedRequest={this.clearSelectedRequest}
+          />
         )}
       </div>
     );

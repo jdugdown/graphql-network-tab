@@ -8,14 +8,13 @@ import styles from "./SidePanel.css";
 
 const REQUEST = "Request";
 const RESPONSE = "Response";
-const TABS = [REQUEST, RESPONSE];
+const TABS = [RESPONSE, REQUEST];
 
-export default function SidePanel({ request, clearSelectedRequest }) {
+export default function SidePanel({ request, response, content, query, clearSelectedRequest }) {
   const [activeTab, setActiveTab] = useState(RESPONSE);
-  const { request: requestObj, response: responseObj } = request;
   const formattedQuery = print(
     gql`
-      ${request.query.query}
+      ${query.query}
     `
   );
   const closeClasses = clsx(styles.tabButton, styles.close);
@@ -23,7 +22,6 @@ export default function SidePanel({ request, clearSelectedRequest }) {
   return (
     <div className={styles.sidePanel}>
       <div className={styles.tabNav}>
-        {/* TODO: close side panel on click */}
         <button type="button" className={closeClasses} onClick={clearSelectedRequest}>
           &times;
         </button>
@@ -53,17 +51,17 @@ export default function SidePanel({ request, clearSelectedRequest }) {
             </pre>
 
             <h3>Headers</h3>
-            <HeadersTable headers={requestObj.headers} />
+            <HeadersTable headers={request.headers} />
           </>
         ) : (
           <>
             <h3>Response Data</h3>
             <pre className={styles.codeBlock}>
-              <code>{JSON.stringify(request.content, null, 2)}</code>
+              <code>{JSON.stringify(content, null, 2)}</code>
             </pre>
 
             <h3>Headers</h3>
-            <HeadersTable headers={responseObj.headers} />
+            <HeadersTable headers={response.headers} />
           </>
         )}
       </div>
@@ -71,29 +69,28 @@ export default function SidePanel({ request, clearSelectedRequest }) {
   );
 }
 
-// TODO: create common type file for request format
 SidePanel.propTypes = {
   request: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    request: PropTypes.shape({
-      headers: PropTypes.arrayOf(
-        PropTypes.shape({
-          name: PropTypes.string.isRequired,
-          value: PropTypes.string.isRequired
-        })
-      ).isRequired
-    }).isRequired,
-    response: PropTypes.shape({
-      headers: PropTypes.arrayOf(
-        PropTypes.shape({
-          name: PropTypes.string.isRequired,
-          value: PropTypes.string.isRequired
-        })
-      ).isRequired
-    }).isRequired,
-    query: PropTypes.shape({
-      query: PropTypes.string.isRequired
-    }).isRequired
+    headers: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        value: PropTypes.string.isRequired
+      })
+    ).isRequired
+  }).isRequired,
+  response: PropTypes.shape({
+    headers: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        value: PropTypes.string.isRequired
+      })
+    ).isRequired
+  }).isRequired,
+  content: PropTypes.shape({
+    data: PropTypes.shape({}).isRequired
+  }).isRequired,
+  query: PropTypes.shape({
+    query: PropTypes.string.isRequired
   }).isRequired,
   clearSelectedRequest: PropTypes.func.isRequired
 };
