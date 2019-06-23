@@ -7,6 +7,7 @@ import isNil from "lodash/isNil";
 import { formatRequestObject, findById } from "../../utils";
 import RequestTable from "../RequestTable/RequestTable";
 import SidePanel from "../SidePanel/SidePanel";
+import styles from "./GraphQLTab.css";
 
 export default class GraphQLTab extends React.Component {
   state = {
@@ -64,7 +65,7 @@ export default class GraphQLTab extends React.Component {
     const { theme } = this.props;
     const { requests, selectedRequest, selectedRequestId } = this.state;
 
-    const themeClass = clsx({
+    const themeClass = clsx(styles.appWrapper, {
       dark: theme === "dark"
     });
 

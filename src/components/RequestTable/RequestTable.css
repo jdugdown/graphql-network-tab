@@ -4,6 +4,12 @@
 
 .requestTable .selectedRow td,
 .requestTable .selectedRow:hover td {
+  background-color: var(--grey-300);
+  font-weight: 700;
+}
+
+:global(.dark) .selectedRow td,
+:global(.dark) .selectedRow:hover td {
   background-color: var(--dark);
   color: var(--light);
 }

@@ -6,9 +6,18 @@
   --error: #e74c3c;
   --dark: #2c3e50;
   --light: #ecf0f1;
-  --transparent-grey-light: rgba(0, 0, 0, 0.1);
-  --transparent-grey: rgba(0, 0, 0, 0.2);
   --transparent-grey-dark: rgba(0, 0, 0, 0.45);
+  --transparent-grey: rgba(0, 0, 0, 0.2);
+  --transparent-grey-light: rgba(0, 0, 0, 0.1);
+  --grey-900: rgb(0, 0, 0);
+  --grey-800: rgb(18, 18, 18);
+  --grey-700: rgb(36, 36, 36);
+  --grey-600: rgb(64, 64, 64);
+  --grey-500: rgb(128, 128, 128);
+  --grey-400: rgb(192, 192, 192);
+  --grey-300: rgb(225, 225, 225);
+  --grey-200: rgb(242, 242, 242);
+  --grey-100: rgb(255, 255, 255);
 }
 
 *,
@@ -25,8 +34,6 @@ h3 {
 }
 
 button {
-  background: var(--primary);
-  color: var(--light);
   border: 0;
   margin: 0;
   padding: 0.25rem 0.5rem;
@@ -35,7 +42,7 @@ button {
 }
 
 :global(.dark) {
-  color: var(--light);
+  color: var(--grey-100);
 }
 
 table {
@@ -50,16 +57,30 @@ thead tr {
 th {
   text-align: left;
   height: 30px;
-  color: var(--light);
+  background-color: var(--grey-200);
+  border-bottom: 1px solid var(--transparent-grey-light);
+  font-weight: 500;
 }
 
-tr:nth-of-type(2n) td {
+:global(.dark) th {
+  background-color: var(--grey-800);
+  color: var(--grey-100);
+}
+
+tr:nth-of-type(2n-1) {
+  background-color: var(--grey-200);
+}
+
+:global(.dark) tr:nth-of-type(2n-1) {
   background-color: var(--transparent-grey);
 }
 
 tr:hover td {
+  background: var(--grey-300);
+}
+
+:global(.dark) tr:hover td {
   background: var(--transparent-grey-dark);
-  color: var(--light);
 }
 
 th,

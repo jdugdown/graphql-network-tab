@@ -1,27 +1,48 @@
 .sidePanel {
-  background: var(--dark);
-  color: var(--light);
+  background: var(--grey-100);
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   width: 75vw;
   z-index: 2;
-  border-left: 1px solid var(--transparent-grey-dark);
+  border-left: 1px solid var(--transparent-grey);
+  box-shadow: 0 0 14px var(--transparent-grey);
+}
+
+:global(.dark) .sidePanel {
+  background: var(--grey-700);
+  color: var(--light);
+  border-left-color: var(--transparent-grey-dark);
 }
 
 .tabNav {
   display: flex;
+  height: 31px;
 }
 
 .tabButton {
   flex: 1 1 auto;
   padding: 0.5rem;
-  background-color: var(--transparent-grey-dark);
+  background-color: var(--grey-200);
+  font-size: 12px;
+  font-weight: 500;
+  border-bottom: 1px solid var(--transparent-grey-light);
+}
+
+:global(.dark) .tabButton {
+  background-color: var(--grey-800);
+  color: var(--grey-100);
 }
 
 .activeTabButton {
-  background-color: var(--dark);
+  background-color: var(--grey-100);
+  border-bottom-color: var(--grey-100);
+}
+
+:global(.dark) .activeTabButton {
+  background-color: var(--grey-700);
+  border-bottom-color: var(--grey-700);
 }
 
 .tabContent {

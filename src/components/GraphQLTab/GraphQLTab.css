@@ -1,0 +1,8 @@
+.appWrapper {
+  background: #fff;
+  height: 100%;
+}
+
+:global(.dark).appWrapper {
+  background: #242424;
+}
