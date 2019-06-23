@@ -2,8 +2,11 @@
   font-size: 16px;
   --primary: #3498db;
   --success: #2ecc71;
+  --success-dark: #27ae60;
   --warning: #f39c12;
+  --warning-dark: #e67e22;
   --error: #e74c3c;
+  --error-dark: #c0392b;
   --dark: #2c3e50;
   --light: #ecf0f1;
   --transparent-grey-dark: rgba(0, 0, 0, 0.45);

@@ -1,9 +1,17 @@
 .warning {
-  color: var(--warning);
+  color: var(--warning-dark);
   font-weight: 700;
 }
 
+:global(.dark) .warning {
+  color: var(--warning);
+}
+
 .error {
-  color: var(--error);
+  color: var(--error-dark);
   font-weight: 700;
+}
+
+:global(.dark) .error {
+  color: var(--error);
 }
