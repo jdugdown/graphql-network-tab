@@ -11,7 +11,7 @@ const RESPONSE = "Response";
 const TABS = [REQUEST, RESPONSE];
 
 export default function SidePanel({ request, clearSelectedRequest }) {
-  const [activeTab, setActiveTab] = useState(REQUEST);
+  const [activeTab, setActiveTab] = useState(RESPONSE);
   const { request: requestObj, response: responseObj } = request;
   const formattedQuery = print(
     gql`
