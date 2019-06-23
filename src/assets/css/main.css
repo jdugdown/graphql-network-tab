@@ -92,3 +92,8 @@ td {
   min-width: 75px;
   width: 12%;
 }
+
+pre {
+  width: 100%;
+  overflow-x: auto;
+}
