@@ -7,18 +7,23 @@
   width: 75vw;
   z-index: 2;
   border-left: 1px solid var(--transparent-grey);
-  box-shadow: 0 0 14px var(--transparent-grey);
+  box-shadow: 0 0 14px var(--transparent-grey-light);
 }
 
 :global(.dark) .sidePanel {
   background: var(--grey-700);
   color: var(--light);
   border-left-color: var(--transparent-grey-dark);
+  box-shadow: 0 0 14px var(--transparent-grey);
 }
 
 .tabNav {
   display: flex;
   height: 31px;
+}
+
+:global(.dark) .tabNav {
+  height: 30px;
 }
 
 .tabButton {
@@ -27,7 +32,9 @@
   background-color: var(--grey-200);
   font-size: 12px;
   font-weight: 500;
+  border-right: 1px solid transparent;
   border-bottom: 1px solid var(--transparent-grey-light);
+  border-left: 1px solid transparent;
 }
 
 :global(.dark) .tabButton {
@@ -37,12 +44,16 @@
 
 .activeTabButton {
   background-color: var(--grey-100);
+  border-right-color: var(--transparent-grey-light);
   border-bottom-color: var(--grey-100);
+  border-left-color: var(--transparent-grey-light);
 }
 
 :global(.dark) .activeTabButton {
   background-color: var(--grey-700);
+  border-right-color: var(--transparent-grey-light);
   border-bottom-color: var(--grey-700);
+  border-left-color: var(--transparent-grey-light);
 }
 
 .tabContent {

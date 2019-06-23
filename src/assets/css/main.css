@@ -75,11 +75,11 @@ th {
   color: var(--grey-100);
 }
 
-tr:nth-of-type(2n-1) {
+tr:nth-of-type(2n) {
   background-color: var(--grey-200);
 }
 
-:global(.dark) tr:nth-of-type(2n-1) {
+:global(.dark) tr:nth-of-type(2n) {
   background-color: var(--transparent-grey);
 }
 

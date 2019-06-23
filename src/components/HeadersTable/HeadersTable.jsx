@@ -5,16 +5,18 @@ import styles from "./HeadersTable.css";
 
 export default function HeadersTable({ headers }) {
   return (
-    <table className={styles.headersTable}>
-      <tbody>
-        {sortBy(headers, "name").map(({ name, value }) => (
-          <tr key={name}>
-            <td className={styles.headerName}>{name}</td>
-            <td>{value}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <div className={styles.tableWrapper}>
+      <table className={styles.headersTable}>
+        <tbody>
+          {sortBy(headers, "name").map(({ name, value }) => (
+            <tr key={name}>
+              <td className={styles.headerName}>{name}</td>
+              <td>{value}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
 
