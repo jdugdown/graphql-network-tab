@@ -12,7 +12,7 @@ export default function RequestTable({ data, selectedRequestId, setSelectedReque
     <table cellSpacing="none" className={styles.requestTable}>
       <thead>
         <tr>
-          <th>Operation(s)</th>
+          <th>Operation</th>
           <th>Returned</th>
           <th className="narrowCell">Warnings</th>
           <th className="narrowCell">Errors</th>
