@@ -15,5 +15,17 @@
 }
 
 .selection {
-  padding-left: 0.5rem;
+  padding-left: 0.75rem;
+}
+
+.statusSuccess {
+  color: var(--success);
+}
+
+.statusWarning {
+  color: var(--warning);
+}
+
+.statusError {
+  color: var(--error);
 }

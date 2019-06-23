@@ -87,7 +87,7 @@ SidePanel.propTypes = {
     ).isRequired
   }).isRequired,
   content: PropTypes.shape({
-    data: PropTypes.shape({}).isRequired
+    data: PropTypes.shape({})
   }).isRequired,
   query: PropTypes.shape({
     query: PropTypes.string.isRequired

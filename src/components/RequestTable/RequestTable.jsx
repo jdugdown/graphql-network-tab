@@ -28,6 +28,12 @@ export default function RequestTable({ data, selectedRequestId, setSelectedReque
           const rowClasses = clsx({
             [styles.selectedRow]: selectedRequestId === id
           });
+          const status = getOrDefault(response, "status");
+          const statusClasses = clsx("narrowCell", {
+            [styles.statusSuccess]: status < 300,
+            [styles.statusWarning]: status >= 300 && status < 400,
+            [styles.statusError]: status >= 400
+          });
 
           return (
             <tr
@@ -54,12 +60,25 @@ export default function RequestTable({ data, selectedRequestId, setSelectedReque
                   })}
               </td>
               <td>
-                {!isNil(content.data) &&
-                  Object.keys(content.data).map(field => <div key={`${id}.${field}`}>{field}</div>)}
+                {!isNil(content) &&
+                  Object.keys(content).map(contentKey => {
+                    return (
+                      <React.Fragment key={contentKey}>
+                        <div>{contentKey}</div>
+                        {contentKey === "data" &&
+                          !isNil(content.data) &&
+                          Object.keys(content.data).map(selection => (
+                            <div className={styles.selection} key={selection}>
+                              {selection}
+                            </div>
+                          ))}
+                      </React.Fragment>
+                    );
+                  })}
               </td>
               <IssuesCell issues={getOrDefault(content, "warnings", [])} cellType="warnings" />
               <IssuesCell issues={getOrDefault(content, "errors", [])} cellType="errors" />
-              <td className="narrowCell">{getOrDefault(response, "status")}</td>
+              <td className={statusClasses}>{status}</td>
               <td className="narrowCell">{`${time} ms`}</td>
             </tr>
           );
@@ -87,14 +106,15 @@ RequestTable.propTypes = {
             name: PropTypes.string.isRequired,
             value: PropTypes.string.isRequired
           })
-        ).isRequired
+        ).isRequired,
+        status: PropTypes.number.isRequired
       }).isRequired,
       time: PropTypes.number.isRequired,
       query: PropTypes.shape({
         query: PropTypes.string.isRequired
       }).isRequired,
       content: PropTypes.shape({
-        data: PropTypes.shape({}).isRequired
+        data: PropTypes.shape({})
       }).isRequired
     })
   ).isRequired,
