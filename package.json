@@ -1,6 +1,6 @@
 {
   "name": "graphql-network-tab",
-  "version": "1.0.0",
+  "version": "0.1.0-alpha",
   "description": "A Chrome extension that adds a more useful network tab for GraphQL operations.",
   "main": "index.js",
   "scripts": {
