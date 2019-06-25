@@ -58,10 +58,6 @@ table {
   border-collapse: collapse;
 }
 
-thead tr {
-  background-color: var(--transparent-grey-dark);
-}
-
 th {
   text-align: left;
   height: 30px;
