@@ -14,11 +14,17 @@ const TABS = [RESPONSE, REQUEST];
 
 export default function SidePanel({ request, response, content, query, clearSelectedRequest }) {
   const [activeTab, setActiveTab] = useState(RESPONSE);
-  const formattedQuery = print(
-    gql`
-      ${query.query}
-    `
-  );
+  let formattedQuery = "";
+  try {
+    formattedQuery = print(
+      gql`
+        ${query.query}
+      `
+    );
+  } catch (error) {
+    console.error("Error trying to parse operation", error);
+    formattedQuery = `Error trying to parse operation: ${error.message}`;
+  }
   const closeClasses = clsx(styles.tabButton, styles.close);
 
   return (

@@ -22,9 +22,14 @@ export default function RequestTable({ data, selectedRequestId, setSelectedReque
       </thead>
       <tbody>
         {data.map(({ content, id, response, time, query }) => {
-          const parsedQuery = gql`
-            ${query.query}
-          `;
+          let parsedQuery = {};
+          try {
+            parsedQuery = gql`
+              ${query.query}
+            `;
+          } catch (error) {
+            console.error("Error trying to parse operation", error);
+          }
           const rowClasses = clsx({
             [styles.selectedRow]: selectedRequestId === id
           });
