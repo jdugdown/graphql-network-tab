@@ -9,6 +9,7 @@
     ],
     "rules": {
         "indent": ["error", 2],
+        "operator-linebreak": ["error", "after", { "overrides": { "?": "before", ":": "before" } }],
         "react/sort-comp": 0,
         "react/destructuring-assignment": 0,
         "import/prefer-default-export": 0
