@@ -1,0 +1,41 @@
+.selectedRow td,
+.selectedRow:hover td {
+  background-color: var(--grey-300);
+  font-weight: 700;
+}
+
+:global(.dark) .selectedRow td,
+:global(.dark) .selectedRow:hover td {
+  background-color: var(--dark);
+  color: var(--light);
+}
+
+.selection {
+  padding-left: 0.75rem;
+}
+
+.statusSuccess {
+  color: var(--success-dark);
+}
+
+:global(.dark) .statusSuccess {
+  color: var(--success);
+}
+
+.statusWarning {
+  color: var(--warning-dark);
+  font-weight: 700;
+}
+
+:global(.dark) .statusWarning {
+  color: var(--warning);
+}
+
+.statusError {
+  color: var(--error-dark);
+  font-weight: 700;
+}
+
+:global(.dark) .statusError {
+  color: var(--error);
+}
