@@ -51,10 +51,13 @@ export default function RequestTable({ data, selectedRequestId, setSelectedReque
             >
               <td>
                 {!isNil(parsedQuery.definitions) &&
-                  parsedQuery.definitions.map(({ operation, selectionSet }) => {
+                  parsedQuery.definitions.map(({ name, operation, selectionSet }) => {
+                    const operationDisplayText = !isNil(name)
+                      ? `${operation} ${getOrDefault(name, "value")}`
+                      : operation;
                     return (
-                      <React.Fragment key={`${id}.${operation}`}>
-                        <div>{operation}</div>
+                      <React.Fragment key={`${id}.${operationDisplayText}`}>
+                        <div>{operationDisplayText}</div>
                         {selectionSet.selections.map(({ name }) => (
                           <div className={styles.selection} key={`${id}.${name.value}`}>
                             {name.value}
