@@ -9,7 +9,7 @@ import RequestTable from "../RequestTable/RequestTable";
 import SidePanel from "../SidePanel/SidePanel";
 import styles from "./GraphQLTab.css";
 
-export default class GraphQLTab extends React.Component {
+export default class GraphQLTab extends React.PureComponent {
   state = {
     selectedRequest: {},
     selectedRequestId: "",
