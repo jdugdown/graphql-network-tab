@@ -1,4 +1,4 @@
-import React, { useState, createRef } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import isNil from "lodash/isNil";
@@ -14,7 +14,6 @@ const RESPONSE = "Response";
 const TABS = [RESPONSE, REQUEST];
 
 export default function SidePanel({ request, response, content, query, clearSelectedRequest }) {
-  const sidePanelRef = createRef();
   const [activeTab, setActiveTab] = useState(RESPONSE);
   const [currentWidth, setCurrentWidth] = useState(`${75}vw`);
   let formattedQuery = "";
@@ -32,8 +31,8 @@ export default function SidePanel({ request, response, content, query, clearSele
   const closeClasses = clsx(styles.tabButton, styles.close);
 
   return (
-    <div ref={sidePanelRef} style={{ width: currentWidth }} className={styles.sidePanel}>
-      <DraggableColumn callback={val => setCurrentWidth(val, sidePanelRef)} />
+    <div style={{ width: currentWidth }} className={styles.sidePanel}>
+      <DraggableColumn callback={val => setCurrentWidth(val)} />
       <div className={styles.tabNav}>
         {TABS.map(tab => {
           const tabClasses = clsx(styles.tabButton, {
