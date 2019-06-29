@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, createRef } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import isNil from "lodash/isNil";
@@ -6,6 +6,7 @@ import isEmpty from "lodash/isEmpty";
 import { print } from "graphql/language/printer";
 import gql from "graphql-tag";
 import HeadersTable from "../HeadersTable/HeadersTable";
+import DraggableColumn from "../DraggableColumn/DraggableColumn";
 import styles from "./SidePanel.css";
 
 const REQUEST = "Request";
@@ -13,8 +14,11 @@ const RESPONSE = "Response";
 const TABS = [RESPONSE, REQUEST];
 
 export default function SidePanel({ request, response, content, query, clearSelectedRequest }) {
+  const sidePanelRef = createRef();
   const [activeTab, setActiveTab] = useState(RESPONSE);
+  const [currentWidth, setCurrentWidth] = useState(`${75}vw`);
   let formattedQuery = "";
+
   try {
     formattedQuery = print(
       gql`
@@ -28,11 +32,9 @@ export default function SidePanel({ request, response, content, query, clearSele
   const closeClasses = clsx(styles.tabButton, styles.close);
 
   return (
-    <div className={styles.sidePanel}>
+    <div ref={sidePanelRef} style={{ width: currentWidth }} className={styles.sidePanel}>
+      <DraggableColumn callback={val => setCurrentWidth(val, sidePanelRef)} />
       <div className={styles.tabNav}>
-        <button type="button" className={closeClasses} onClick={clearSelectedRequest}>
-          &times;
-        </button>
         {TABS.map(tab => {
           const tabClasses = clsx(styles.tabButton, {
             [styles.activeTabButton]: tab === activeTab
@@ -48,18 +50,21 @@ export default function SidePanel({ request, response, content, query, clearSele
             </button>
           );
         })}
+        <button type="button" className={closeClasses} onClick={clearSelectedRequest}>
+          &times;
+        </button>
       </div>
 
       <div className={styles.tabContent}>
         {activeTab === RESPONSE ? (
           <>
+            <h3>Headers</h3>
+            <HeadersTable headers={response.headers} />
+
             <h3>Response Data</h3>
             <pre className={styles.codeBlock}>
               <code>{JSON.stringify(content, null, 2)}</code>
             </pre>
-
-            <h3>Headers</h3>
-            <HeadersTable headers={response.headers} />
           </>
         ) : (
           <>

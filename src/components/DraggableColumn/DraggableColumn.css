@@ -1,0 +1,9 @@
+.draggableDivider {
+  left: 0;
+  top: 0;
+  width: 3vh;
+  height: 100%;
+  cursor: col-resize;
+  background: transparent;
+  position: absolute;
+}
