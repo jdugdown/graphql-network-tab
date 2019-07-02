@@ -67,6 +67,9 @@ export default function SidePanel({ request, response, content, query, clearSele
           </>
         ) : (
           <>
+            <h3>Headers</h3>
+            <HeadersTable headers={request.headers} />
+
             <h3>Query</h3>
             <pre className={styles.codeBlock}>
               <code>{formattedQuery}</code>
@@ -80,9 +83,6 @@ export default function SidePanel({ request, response, content, query, clearSele
                 </pre>
               </>
             )}
-
-            <h3>Headers</h3>
-            <HeadersTable headers={request.headers} />
           </>
         )}
       </div>
