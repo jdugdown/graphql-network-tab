@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Draggable from "react-draggable";
 import styles from "./DraggableColumn.css";
 
@@ -9,3 +10,7 @@ export default function DraggableColumn({ callback }) {
     </Draggable>
   );
 }
+
+DraggableColumn.propTypes = {
+  callback: PropTypes.func.isRequired
+};
