@@ -4,7 +4,6 @@
   top: 0;
   right: 0;
   bottom: 0;
-  width: 75vw;
   z-index: 2;
   border-left: 1px solid var(--transparent-grey);
   box-shadow: 0 0 14px var(--transparent-grey-light);
