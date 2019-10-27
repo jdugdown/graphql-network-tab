@@ -5,6 +5,7 @@ import isNil from "lodash/isNil";
 import isEmpty from "lodash/isEmpty";
 import { print } from "graphql/language/printer";
 import gql from "graphql-tag";
+import JsonViewer from "react-json-view";
 import HeadersTable from "../HeadersTable/HeadersTable";
 import DraggableColumn from "../DraggableColumn/DraggableColumn";
 import styles from "./SidePanel.css";
@@ -13,11 +14,18 @@ const REQUEST = "Request";
 const RESPONSE = "Response";
 const TABS = [RESPONSE, REQUEST];
 
-export default function SidePanel({ request, response, content, query, clearSelectedRequest }) {
+export default function SidePanel({
+  clearSelectedRequest,
+  content,
+  query,
+  request,
+  response,
+  theme
+}) {
   const [activeTab, setActiveTab] = useState(RESPONSE);
   const [currentWidth, setCurrentWidth] = useState(`${75}vw`);
-  let formattedQuery = "";
 
+  let formattedQuery = "";
   try {
     formattedQuery = print(
       gql`
@@ -28,7 +36,20 @@ export default function SidePanel({ request, response, content, query, clearSele
     console.error("Error trying to parse operation", error);
     formattedQuery = `Error trying to parse operation: ${error.message}`;
   }
+
   const closeClasses = clsx(styles.tabButton, styles.close);
+
+  const jsonProps = {
+    collapsed: 3,
+    displayObjectSize: false,
+    displayDataTypes: false,
+    // TODO: set up copy using background script
+    enableClipboard: false,
+    indentWidth: 2,
+    name: null,
+    style: { background: "none" },
+    theme: theme === "dark" ? "chalk" : "rjv-default"
+  };
 
   return (
     <div style={{ width: currentWidth }} className={styles.sidePanel}>
@@ -61,9 +82,7 @@ export default function SidePanel({ request, response, content, query, clearSele
             <HeadersTable headers={response.headers} />
 
             <h3>Response Data</h3>
-            <pre className={styles.codeBlock}>
-              <code>{JSON.stringify(content, null, 2)}</code>
-            </pre>
+            <JsonViewer src={content} {...jsonProps} />
           </>
         ) : (
           <>
@@ -78,9 +97,7 @@ export default function SidePanel({ request, response, content, query, clearSele
             {!isNil(query.variables) && !isEmpty(query.variables) && (
               <>
                 <h3>Variables</h3>
-                <pre className={styles.codeBlock}>
-                  <code>{JSON.stringify(query.variables, null, 2)}</code>
-                </pre>
+                <JsonViewer src={query.variables} {...{ ...jsonProps, collapsed: false }} />
               </>
             )}
           </>
@@ -91,6 +108,14 @@ export default function SidePanel({ request, response, content, query, clearSele
 }
 
 SidePanel.propTypes = {
+  clearSelectedRequest: PropTypes.func.isRequired,
+  content: PropTypes.shape({
+    data: PropTypes.shape({})
+  }).isRequired,
+  query: PropTypes.shape({
+    query: PropTypes.string.isRequired,
+    variables: PropTypes.shape({})
+  }).isRequired,
   request: PropTypes.shape({
     headers: PropTypes.arrayOf(
       PropTypes.shape({
@@ -107,12 +132,5 @@ SidePanel.propTypes = {
       })
     ).isRequired
   }).isRequired,
-  content: PropTypes.shape({
-    data: PropTypes.shape({})
-  }).isRequired,
-  query: PropTypes.shape({
-    query: PropTypes.string.isRequired,
-    variables: PropTypes.shape({})
-  }).isRequired,
-  clearSelectedRequest: PropTypes.func.isRequired
+  theme: PropTypes.string.isRequired
 };

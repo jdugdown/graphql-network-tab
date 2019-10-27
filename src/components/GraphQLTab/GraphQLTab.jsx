@@ -83,6 +83,7 @@ export default class GraphQLTab extends React.PureComponent {
             content={getOrDefault(selectedRequest, "content", {})}
             query={getOrDefault(selectedRequest, "query", {})}
             clearSelectedRequest={this.clearSelectedRequest}
+            theme={theme}
           />
         )}
       </div>
