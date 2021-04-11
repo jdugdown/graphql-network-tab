@@ -67,9 +67,23 @@ th {
   font-weight: 500;
 }
 
+:global(.dark) input {
+  background-color: var(--grey-800);
+  color: var(--grey-100);
+}
+
+:global(.dark) select {
+  background-color: var(--grey-800);
+  color: var(--grey-100);
+}
+
 :global(.dark) th {
   background-color: var(--grey-800);
   color: var(--grey-100);
+}
+
+:global(.dark) svg path {
+  fill: var(--grey-100);
 }
 
 tr:nth-of-type(2n) {

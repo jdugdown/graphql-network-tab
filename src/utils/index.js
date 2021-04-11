@@ -2,6 +2,14 @@ import defaultTo from "lodash/defaultTo";
 import get from "lodash/get";
 import uuid from "uuid/v4";
 
+/**
+ * Gets a specified value or the default (if provided)
+ *
+ * @param {Object} object object to get property value from.
+ * @param {string} path property path to retrieve
+ * @param {any} fallback Fallback to return if property cannot be found
+ * @returns {any}
+ */
 export const getOrDefault = (object, path, fallback = "") => defaultTo(get(object, path), fallback);
 
 export const formatRequestObject = ({ request, response, time }, content) => ({
