@@ -92,8 +92,6 @@ export default class GraphQLTab extends React.PureComponent {
       dark: theme === "dark"
     });
 
-    global.console.log(requests);
-
     const filteredRequests = filter(requests, request => {
       const {
         content: { data = {}, errors = {} }
