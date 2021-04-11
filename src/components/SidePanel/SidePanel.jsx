@@ -51,6 +51,15 @@ export default function SidePanel({
     theme: theme === "dark" ? "chalk" : "rjv-default"
   };
 
+  const copyToClipboard = () => {
+    global.document.execCommand("copy");
+  };
+
+  global.document.addEventListener("copy", e => {
+    e.clipboardData.setData("text/plain", JSON.stringify(content));
+    e.preventDefault();
+  });
+
   return (
     <div style={{ width: currentWidth }} className={styles.sidePanel}>
       <DraggableColumn callback={val => setCurrentWidth(val)} />
@@ -80,8 +89,10 @@ export default function SidePanel({
           <>
             <h3>Headers</h3>
             <HeadersTable headers={response.headers} />
-
             <h3>Response Data</h3>
+            <button onClick={copyToClipboard} className={styles.clipboardButton} type="button">
+              (Copy to clipboard)
+            </button>
             <JsonViewer src={content} {...jsonProps} />
           </>
         ) : (

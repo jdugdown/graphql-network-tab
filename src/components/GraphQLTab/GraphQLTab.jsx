@@ -1,11 +1,14 @@
-import React from "react";
 import clsx from "clsx";
-import PropTypes from "prop-types";
+import filter from "lodash/filter";
 import get from "lodash/get";
 import isEmpty from "lodash/isEmpty";
 import isNil from "lodash/isNil";
-import { formatRequestObject, findById, getOrDefault } from "../../utils";
+import some from "lodash/some";
+import PropTypes from "prop-types";
+import React from "react";
+import { findById, formatRequestObject, getOrDefault } from "../../utils";
 import RequestTable from "../RequestTable/RequestTable";
+import SearchBar from "../SearchBar/SearchBar";
 import SidePanel from "../SidePanel/SidePanel";
 import styles from "./GraphQLTab.css";
 
@@ -13,7 +16,8 @@ export default class GraphQLTab extends React.PureComponent {
   state = {
     selectedRequest: {},
     selectedRequestId: "",
-    requests: []
+    requests: [],
+    filterValue: ""
   };
 
   componentDidMount() {
@@ -61,18 +65,53 @@ export default class GraphQLTab extends React.PureComponent {
     });
   };
 
+  clearRequests = () => {
+    this.setState({
+      requests: [],
+      selectedRequestId: "",
+      selectedRequest: {}
+    });
+  };
+
+  setFilterValue = filterValue => {
+    this.setState({
+      filterValue
+    });
+  };
+
+  doesObjectKeyContainFilter = obj => {
+    const { filterValue } = this.state;
+    return some(Object.keys(obj), key => key.toLowerCase().includes(filterValue.toLowerCase()));
+  };
+
   render() {
     const { theme } = this.props;
-    const { requests, selectedRequest, selectedRequestId } = this.state;
+    const { filterValue, requests, selectedRequest, selectedRequestId } = this.state;
 
     const themeClass = clsx(styles.appWrapper, {
       dark: theme === "dark"
     });
 
+    const filteredRequests = filter(requests, request => {
+      const {
+        content: { data = {}, errors = {} }
+      } = request;
+
+      const hasDataMatch = this.doesObjectKeyContainFilter(data);
+      const hasErrorMatch = this.doesObjectKeyContainFilter(errors);
+
+      return hasDataMatch || hasErrorMatch;
+    });
+
     return (
       <div className={themeClass}>
+        <SearchBar
+          clearRequests={this.clearRequests}
+          filterValue={filterValue}
+          setFilterValue={this.setFilterValue}
+        />
         <RequestTable
-          data={requests}
+          data={filterValue.length ? filteredRequests : requests}
           selectedRequestId={selectedRequestId}
           setSelectedRequest={this.setSelectedRequest}
         />

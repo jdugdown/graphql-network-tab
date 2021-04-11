@@ -73,3 +73,9 @@
 .codeBlock {
   margin-bottom: 1rem;
 }
+
+.clipboardButton {
+  background: transparent;
+  color: var(--gray-500);
+  display: inline-block;
+}
